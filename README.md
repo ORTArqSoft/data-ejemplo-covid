@@ -65,7 +65,8 @@ CREATE INDEX ON :Persona(diaHoraDetectado);
 LOAD CSV WITH HEADERS FROM 'file:///visita_lugares.csv' AS csv
 FIELDTERMINATOR ';'
 MATCH (p:Persona {id:csv.PersonaId}), (l:Lugar {id:csv.LugarId})
-CREATE (p)-[rv:VISITA {id:csv.VisitaId, horaInicio:datetime(csv.HoraInicio), horaFin:datetime(csv.HoraFin)}]->(l)
+CREATE (p)-[rv:VISITA {id:csv.VisitaId, horaInicio:datetime(csv.HoraInicio), 
+                                        horaFin:datetime(csv.HoraFin)}]->(l)
 SET rv.duracion=duration.inSeconds(rv.horaInicio, rv.horaFin);
 ```
 ### relaciones visitas - personas
@@ -73,7 +74,8 @@ SET rv.duracion=duration.inSeconds(rv.horaInicio, rv.horaFin);
 LOAD CSV WITH HEADERS FROM 'file:///visita_personas.csv' AS csv
 FIELDTERMINATOR ';'
 MATCH (p1:Persona {id:csv.Persona1Id}), (p2:Persona {id:csv.Persona2Id})
-CREATE (p1)-[rv:VISITA {id:csv.VisitaId, horaInicio:datetime(csv.HoraInicio), horaFin:datetime(csv.HoraFin)}]->(p2)
+CREATE (p1)-[rv:VISITA {id:csv.VisitaId, horaInicio:datetime(csv.HoraInicio), 
+                                         horaFin:datetime(csv.HoraFin)}]->(p2)
 SET rv.duracion=duration.inSeconds(rv.horaInicio, rv.horaFin);
 ```
 
